@@ -1,4 +1,5 @@
 from flask import Flask, request, send_file
+from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import os
 import time

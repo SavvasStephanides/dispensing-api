@@ -1,4 +1,4 @@
-from flask import Flask, request, send_file, Response
+from flask import Flask, request, send_file
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import os
@@ -19,4 +19,4 @@ def convert():
     convert_controller.convert_xml_to_excel(file_name_prefix)
 
     output_path = "/exceloutput/" + file_name_prefix + ".xlsx"
-    return Response(send_file(output_path, as_attachment=True), mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    return send_file(output_path, as_attachment=True)

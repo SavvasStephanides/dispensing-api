@@ -5,6 +5,7 @@ import time
 from modules.controller.ConvertController import ConvertController
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/convert", methods=['POST'])
 def convert():

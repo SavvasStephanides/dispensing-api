@@ -2,6 +2,7 @@ FROM python:3.7
 RUN pip install XlsxWriter
 RUN pip install flask
 RUN pip install flask-cors
+RUN pip install boto3
 RUN mkdir /uploads
 RUN mkdir /exceloutput
 WORKDIR /root

@@ -4,6 +4,7 @@ from werkzeug.utils import secure_filename
 import os
 import time
 from modules.controller.ConvertController import ConvertController
+import boto3
 
 app = Flask(__name__)
 CORS(app)
@@ -19,4 +20,10 @@ def convert():
     convert_controller.convert_xml_to_excel(file_name_prefix)
 
     output_path = "/exceloutput/" + file_name_prefix + ".xlsx"
-    return send_file(output_path, as_attachment=True)
+
+    file = open(output_path, "rb")
+
+    s3 = boto3.client('s3')
+    s3.upload_fileobj(file, "dispensing-output", file.name.split('/')[2], ExtraArgs={'ACL': 'public-read'})
+
+    return file_name_prefix + ".xlsx"
